@@ -1,24 +1,26 @@
 import { useState } from "react";
-import styleModule from "./App.module.sass"
+import styleModule from "./App.module.sass";
+import Footer from "./components/Layout/Footer/Footer";
+import Main from "./components/Layout/Main/Main";
+import MenuTopBar from "./components/Layout/MenuTopBar/MenuTopBar";
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
-  const [values, setValues] = useState();
-
-  const handleClick = () => {
-    setCounter(counter + 1);
-    setValues(values.concat(counter));
-  };
-
-  return(
-  <div className={styleModule.container}>
-    <h1>Hello World</h1>
-    <button onClick={handleClick}> press this!</button>
-    <div>
-      <strong> {counter} </strong>
+  const [seccion, setSeccion] = useState("main");
+  return (
+    <div className={styleModule.main}>
+      <MenuTopBar _handleChangeSection={(item) => setSeccion(item)} />
+      <div className={styleModule.containerContent}>
+        {seccion == "main" ? (
+          <Main />
+        ) : seccion == "add_Sensor" ? (
+          <div>Agregar Sensor</div>
+        ) : (
+          <div>Gráficas</div>
+        )}
       </div>
-  </div>
+      <Footer />
+    </div>
   );
-}
+};
 
 export default App;
