@@ -33,7 +33,17 @@ const ruleForImg = {
     },
   ],
 };
-const rules = [ruleForJavaScript, rulesForStyles, ruleForSVG, ruleForImg];
+
+const ruleForHtml = {
+  test: /\.html$/,
+  use: [
+      {
+          loader: "html-loader"
+      }
+  ]
+}
+
+const rules = [ruleForJavaScript, rulesForStyles, ruleForSVG, ruleForImg, ruleForHtml];
 module.exports = (env, argv) => {
   const { mode } = argv;
   const isProduction = mode == "production";
