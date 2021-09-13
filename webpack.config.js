@@ -1,4 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+var BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+const TerserPlugin = require("terser-webpack-plugin");
 const path = require("path");
 const rulesForStyles = {
   test: /\.(c|sc|sa)ss$/,
@@ -42,6 +46,27 @@ module.exports = (env, argv) => {
     output: {
       filename: isProduction ? "[name].[contenthash].js" : "main.js",
       path: path.resolve(__dirname, "build"),
+    },
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            mangle: {
+              reserved: ["$super"]
+            }
+          }
+        }),
+        new webpack.LoaderOptionsPlugin({
+          options: {
+            optimization: {
+              splitChunks: {
+                chunks: "all"
+              }
+            }
+          }
+        })
+        // new CssMinimizerPlugin()
+      ]
     },
     resolve: {
       extensions: [".js", ".jsx", ".json"],
