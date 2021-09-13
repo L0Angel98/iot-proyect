@@ -33,17 +33,7 @@ const ruleForImg = {
     },
   ],
 };
-
-const ruleForHtml = {
-  test: /\.html$/,
-  use: [
-      {
-          loader: "html-loader"
-      }
-  ]
-}
-
-const rules = [ruleForJavaScript, rulesForStyles, ruleForSVG, ruleForImg, ruleForHtml];
+const rules = [ruleForJavaScript, rulesForStyles, ruleForSVG, ruleForImg];
 module.exports = (env, argv) => {
   const { mode } = argv;
   const isProduction = mode == "production";
@@ -60,7 +50,7 @@ module.exports = (env, argv) => {
     module: { rules: rules },
     devServer: {
       open: true, //abrirnos el navegador
-      port: 8000,
+      port: 3000,
       compress: true,
     },
     devtool: "inline-source-map",
