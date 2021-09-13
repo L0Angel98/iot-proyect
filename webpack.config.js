@@ -50,7 +50,7 @@ module.exports = (env, argv) => {
     module: { rules: rules },
     devServer: {
       open: true, //abrirnos el navegador
-      port: 3000,
+      port: 8000,
       compress: true,
     },
     devtool: "inline-source-map",
